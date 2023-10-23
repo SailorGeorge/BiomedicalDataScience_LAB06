@@ -3,6 +3,11 @@ title: "Biomedical Data Science - Data Quality lab session"
 author: |
         | Carlos Sáez <carsaesi@upv.es>
         |
+        | Lab completed by:
+        | Juras Lukasevicius 
+        | Enrico Maria Marinelli
+        | Francesco Pio Capoccello
+        |
         | Biomedical Data Science Lab, Departamento of Applied Physics, Universitat Politècnica de València, España
 date: "October, 2022"
 output: 
@@ -42,7 +47,7 @@ getwd()
 Otherwise, we set it (change the example directory to ours):
 
 ```{r eval=FALSE}
-setwd("D:/PRACTICAS/P3")
+setwd("D:/Users/Vartotojas/Documents/GitHub/BiomedicalDataScience_LAB05")
 ```
 
 We install the required libraries and then load them into the working environment.
@@ -79,11 +84,11 @@ fileName = "data/DQIinfantFeeding.csv"
 # Whether it has a header or not
 hasHeader = TRUE
 # Main date column to be used for monitoring purposes
-dateColumn = ##TODO##
+dateColumn = 'BIRTH_DATE'
 # Format of the previous date
 dateFormat = '%d/%m/%Y'
 # Which text string will represent missing data
-missingValue = ##TODO##
+missingValue = 'NA' # There are no missing values?
 ```
 
 We load the file __data/DQIinfantFeeding.csv__ in a __data.frame__ named __repository__:
@@ -140,7 +145,7 @@ plot(resIndicatorES2SC_delroom,xlab = "Date", ylab ="%",main = "Early breastfeed
 ***
 📝 *DISCUSS RESULTS*
 
-...
+When initializing the function for the indicator
 
 ***
 

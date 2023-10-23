@@ -352,6 +352,11 @@ display: none;
 session</h1>
 <h4 class="author"><div class="line-block">Carlos Sáez <a href="mailto:carsaesi@upv.es" class="email">carsaesi@upv.es</a><br />
 <br />
+Lab completed by:<br />
+Juras Lukasevicius<br />
+Enrico Maria Marinelli<br />
+Francesco Pio Capoccello<br />
+<br />
 Biomedical Data Science Lab, Departamento of Applied Physics,
 Universitat Politècnica de València, España</div></h4>
 <h4 class="date">October, 2022</h4>
@@ -413,7 +418,7 @@ environment</h1>
 practice file and the folder with the data:</p>
 <pre class="r"><code>getwd()</code></pre>
 <p>Otherwise, we set it (change the example directory to ours):</p>
-<pre class="r"><code>setwd(&quot;D:/PRACTICAS/P3&quot;)</code></pre>
+<pre class="r"><code>setwd(&quot;D:/Users/Vartotojas/Documents/GitHub/BiomedicalDataScience_LAB05&quot;)</code></pre>
 <p>We install the required libraries and then load them into the working
 environment.</p>
 <pre class="r"><code>install.packages(&quot;zoo&quot;, repos = &quot;http://cran.us.r-project.org&quot;)
@@ -439,11 +444,11 @@ fileName = &quot;data/DQIinfantFeeding.csv&quot;
 # Whether it has a header or not
 hasHeader = TRUE
 # Main date column to be used for monitoring purposes
-dateColumn = ##TODO##
+dateColumn = &#39;BIRTH_DATE&#39;
 # Format of the previous date
 dateFormat = &#39;%d/%m/%Y&#39;
 # Which text string will represent missing data
-missingValue = ##TODO##</code></pre>
+missingValue = &#39;NA&#39; # There are no missing values?</code></pre>
 <p>We load the file <strong>data/DQIinfantFeeding.csv</strong> in a
 <strong>data.frame</strong> named <strong>repository</strong>:</p>
 <pre class="r"><code>repository &lt;- read.csv2(fileName, header=hasHeader, na.strings=missingValue)
