@@ -22,7 +22,7 @@ output:
 ```{r setup, include=FALSE}
 
 # IMPORTANT! -> For the development of the practice on your computers, remove the parameter 'eval = FALSE' from the following line).
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, eval = FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE) #eval = FALSE
 
 ```
 
@@ -88,7 +88,7 @@ dateColumn = 'BIRTH_DATE'
 # Format of the previous date
 dateFormat = '%d/%m/%Y'
 # Which text string will represent missing data
-missingValue = 'NA' # There are no missing values?
+missingValue = NA # Currently, there are no missing values in the date collumn
 ```
 
 We load the file __data/DQIinfantFeeding.csv__ in a __data.frame__ named __repository__:
@@ -145,7 +145,11 @@ plot(resIndicatorES2SC_delroom,xlab = "Date", ylab ="%",main = "Early breastfeed
 ***
 📝 *DISCUSS RESULTS*
 
-When initializing the function for the indicator
+When plotting the function by monthly data, we get a time series plot, which indicates the percentage of cases with early breastfeeding for the given time period.
+
+![](D:/Users/Vartotojas/Documents/GitHub/BiomedicalDataScience_LAB05/data/000015.png)
+
+We can see that a large chunk of data between mid-2009 and early 2011 is missing. We can also find that a majority of the graph lies between 80%, meaning that $\frac{4}{5}$ of cases show early breastfeeding start in the delivery room.
 
 ***
 
@@ -165,13 +169,14 @@ completenessByColumn
 Next, we will calculate and display the overall percentage of missing data:
 
 ```{r }
-completenessByDataset = ##TODO##
+completenessByDataset = sum(!is.na(repository))/(N*D) * 100
+100 - completenessByDataset
 ```
 
 ***
 📝 *DISCUSS RESULTS*
 
-...
+Applying 
 
 ***
 
@@ -193,9 +198,7 @@ dimCompletenessByColumn <- function(repository){
 Once the function is loaded in the environment, we can easily apply it to the batches of data at the desired time frequency using the **apply** family of functions from the **xts** (*Raster Time Series Analysis*) library. In this monthly case, we will use __apply.monthly__, to which we will pass as parameters the repository converted to **zoo** and the previously created function:
 
 ```{r }
-resCompletenessByColumn = apply.monthly(
-  ##TODO##
-  )
+  wadawd
 ```
 
 Now, we can create a plot with the results using the **plotly** library (Create Interactive Web Graphics via 'plotly.js'). First for each variable:
