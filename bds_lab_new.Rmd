@@ -88,7 +88,7 @@ dateColumn = 'BIRTH_DATE'
 # Format of the previous date
 dateFormat = '%d/%m/%Y'
 # Which text string will represent missing data
-missingValue = NA # Currently, there are no missing values in the date column
+missingValue = ""
 ```
 
 We load the file __data/DQIinfantFeeding.csv__ in a __data.frame__ named __repository__:
@@ -147,8 +147,6 @@ plot(resIndicatorES2SC_delroom,xlab = "Date", ylab ="%",main = "Early breastfeed
 
 When plotting the function by monthly data, we get a time series plot, which indicates the percentage of cases with early breastfeeding for the given time period.
 
-![](D:/Users/Vartotojas/Documents/GitHub/BiomedicalDataScience_LAB05/data/000015.png)
-
 We can see that a large chunk of data between mid-2009 and early 2011 is missing. We can also find that a majority of the graph lies between 80%, meaning that $\frac{4}{5}$ of cases show early breastfeeding start in the delivery room.
 
 ***
@@ -176,7 +174,15 @@ completenessByDataset = sum(!is.na(repository))/(N*D) * 100
 ***
 📝 *DISCUSS RESULTS*
 
-Applying the `completenessByColumn` function, we find that almost  $69\%$ of NEO_APGAR_NUM column data is missing and $4.58\%$ of NEO_WEIGHT_NUM column data is also missing. These two columns overall conclude, that we have $4.88\%$ missing values in our data set, the majority being in the NEO_APGAR_NUM column. 
+Applying the `completenessByColumn` function, we find that the only two columns without missing data are the `PATIENT_ID` and `BIRTH_DATE`. This might be because they are the key columns for identifying the specific case, so it is prohibited to leave these cells empty. We find that the most empty columns are of `DEL_IN_INTRACA` (only $3.66\%$ of values exist), `NEO_APGAR_NUM` ($31.31\%$) and `DEL_TYPE_A` ($41.62\%$).
+
+The `DEL_IN_INTRACA` variable seems to represent some type of complication during birth (such as "Risk of fetal compromise", "Failed labour induction", "No labour progression" and etc.), which explains why there are so little values - most cases don't have complications. 
+
+`NEO_APGAR_NUM` is a numeric variable with only one value - $10$. It is hard to say what this specific variable points out about the patient, but since there are only two possible outcomes (either `10` or ` `), we can assume this variable acts as a `TRUE` or `FALSE` classifier. If we would follow the theme, the empty cells could be replaces with $0$ values.
+
+`DEL_TYPE_A` could indicate in what location the anaesthetic was supplied. The missing values could point to no aesthetic being used.
+
+In regards to overall completeness of the data set, we find that $18.58\%$ of values are missing in the data set. Although this number may cause some concern, we can also find that some missing values are not essential and can be replaced with other classifiers.
 
 ***
 
@@ -244,7 +250,7 @@ resCompletenessByDataset = apply.monthly(zooRepository, FUN=dimCompletenessByDat
 
 p <-
   plot_ly(
-    x = index(resCompletenessByDataset),
+    x = index(resCompletenessByColumn),
     y = resCompletenessByDataset,
     type = 'scatter',
     mode = 'lines'
@@ -261,7 +267,17 @@ p
 ***
 📝 *DISCUSS RESULTS*
 
-...
+When analyzing data completeness for each variable, we can see that there are inconsistencies throughout the years. 
+
+Most variables show data completeness not reaching under $85\%$ for all the months (these variables being `PATIENT_ID`, `NEO_ES2SC_TYPE`, `NEO_ES2SCP_TYPE`, `NEO_MOMFBF_TYPE`, `NEO_PFBF_TYPE`, `NEO_FBFEVAL_TY` and `NEO_BF_DIS`, which reaches the lowest consistency in the first month of $85.53\%$). `NEO_WEIGHT_NUM` also shows relative completeness for the majority of data, but the percentage plumits in the end of 2014, reaching the lowest point of $77.08\%$.
+
+On further analysis, we find that a lot of values are lost in the month of November, 2014. Both `DEL_TYPE_ANE` and `DEL_MODE` take a huge dip in this month (reaching nearly $60\%$ points). We can see similar dips in this month for the variables `DEL_TYPE_A` and `NEO_APGAR_SUM`.
+
+Another interesting thing to notice is the lack of data for the variables `NEO_PH_CORD` and `DEL_IN_INTRACA` in the first time portions of the data. `NEO_PH_CORD` has its first input in April, 2010, and `DEL_IN_INTRACA` has its first input in March, 2011. After these first inputs, `NEO_PH_CORD` shows a large increase in data completeness, at times reaching $100\%$ for certain months. The same can't be said for the variable `DEL_IN_INTRACA`, which hovers between $0-15\%$ for the remainder of the data.
+
+The last two variables `DEL_TYPE_A` and `NEO_APGAR_NUM` have varying data completeness throughout the months, similar to white noise. By the end of 2014, the monthly data completeness reaches $0\%$.
+
+All of these incomplete variables lead to the heavily fluctuating graph of global completeness by month, which starts off with low completeness (around $73\%$ due to `NEO_PH_CORD` and `DEL_IN_INTRACA`) and later fluctuates around $83\%$, then suddenly plumitting to a low point of $68\%$ in November, 2014 (due to `DEL_TYPE_ANE` and `DEL_MODE`).
 
 ***
 
