@@ -305,7 +305,9 @@ knitr::kable(profile$checks[,c(1,7)])
 ***
 📝 *DISCUSS RESULTS*
 
-...
+When checking the rules for the given data set, we find that there are $220$ inconsistencies for `elective caesarea` delivery cases and $245$ inconsistencies for `emergency caesarea` delivery cases.
+
+An interesting thing to note is that for the second rule, the errors are frequent up until the $1610$ element in the data set. After this, there is a huge gap up until element $3149$. This shows that the data in between this period is more consistent than before in the first half of the data set. The same can't be said about the rule checking for `elective caesarea` errors - this check shows many errors all throughout the data set.
 
 ***
 
@@ -370,7 +372,14 @@ Either using the web application, or obtaining the graphs in RStudio, we will st
 ***
 📝 *DISCUSS RESULTS*
 
-...
+The temporal heat map for the provided anesthesia type `DEL_TYPE_ANE` shows the distribution of all existing values of the given variable. We find that values like `spinal`, `local`, `no` and `epidural` are densely confined in the period between August, 2009, and April, 2011. This specific format is rarely used before and after this period and is the big cause for our incomplete time series graph in section 4 of this lab session. This could be corrected by transforming these given values into corresponding complete ones, such as `Local anesthesia`, `Without anesthesia`, `Epidural anesthesia`.
+
+Spinal anesthesia seems to not have three most used formats throughout the data frame: up until August, 2009 we have the value `Spinal anesthesia`, then `spinal` up until March, 2011, and after this the procedure is mainly represented by the value `Spinal`. All of these could be reformatted to one value for more comprehensive results.
+
+Another interesting thing to note is the large proportion of non-existing values `<NA>` in November, 2014, which were also noted in section 5.2 of the lab.
+
+
+The IGT plot also shows the change of variable density, showing jumps from July, 2009 and then from March, 2011. These swings create a parabola-like trajectory.
 
 ***
 
